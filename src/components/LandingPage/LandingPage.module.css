@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+}
+
+.upload_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video_box {
+  width: 400px;
+  height: 300px;
+}
+
+.no_video_box{
+  width: 320px;
+  height: 240px;
+  border: 1px solid black;
+}
+
+.video_holder{
+  width: 320px;
+  height: 240px;
+  object-fit: contain;
+}
+
+.input_file{
+  margin-bottom: 30px;
+}
+
+.clear_button{
+  position: absolute;
+  left: 0px;
+}
