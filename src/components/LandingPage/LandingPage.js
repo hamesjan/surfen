@@ -31,6 +31,7 @@ const LandingPage = () => {
     //   // Handle the upload failure
     //   console.error(uploadResult.error);
     // }
+    console.log(file);
   };
 
   return (

@@ -12,6 +12,7 @@
     }
   ],
   "hosting": {
+    "site": "surfen",
     "public": "public",
     "ignore": [
       "firebase.json",
