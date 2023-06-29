@@ -13,13 +13,7 @@
   ],
   "hosting": {
     "site": "surfen",
-    "public": "public",
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
