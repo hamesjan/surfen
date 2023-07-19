@@ -46,3 +46,26 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: flex;
+    gap: 0.2rem;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .header .site_title{
+    font-size: 15px;
+  }
+
+  .site_nav {
+    gap: 10px;
+    font-size: small;
+  }
+
+  .profile_containter {
+    gap: 1rem;
+  }
+}

@@ -1,8 +1,18 @@
+.outer_div{
+  display: block;
+}
+
+.info_header{
+  text-align: center;
+  margin-bottom: 4cqh;
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30vh;
+  margin-top: 30px;
 }
 
 .upload_container {
@@ -12,6 +22,7 @@
 }
 
 .video_box {
+  position: relative;
   width: 400px;
   height: 300px;
 }
@@ -35,4 +46,32 @@
 .clear_button{
   position: absolute;
   left: 0px;
+}
+
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .no_video_box{
+    position: inherit;
+    margin-left: 50px;
+  }
+
+  .clear_button{
+    position: absolute;
+    left: 50px;
+  }
+
+  .info_header{
+    font-size: 12px;
+    padding: 10px;
+  }
+  
 }

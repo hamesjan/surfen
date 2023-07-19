@@ -8,6 +8,7 @@ const MainNavigation = (props) => {
         <Link className={classes.site_title} to="/home">
           Surf Enhancer
         </Link>
+        <div style={{ flex: 1 }} />
         <nav className={classes.site_nav}>
           {/* <ul>
             <li>
@@ -15,7 +16,7 @@ const MainNavigation = (props) => {
             </li>
           </ul> */}
         </nav>
-        <div className={classes.profile_containter}>
+        {/* <div className={classes.profile_containter}>
           {(props.isLoggedIn === false || props.isLoggedIn === undefined) && (
             <>
               <Link className={classes.login_link} to="/login">
@@ -39,7 +40,7 @@ const MainNavigation = (props) => {
               <span>Hi, {props.username}</span>
             </Link>
           )}
-        </div>
+        </div> */}
       </header>
     </div>
   );
