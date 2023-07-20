@@ -75,7 +75,7 @@ const LandingPage = () => {
         // update progress
         setPercent(percent);
       },
-      (err) => console.log(err),
+      (err) => alert("ERROR: 404 TROLOLOL"),
       () => {
         // download url
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
@@ -105,9 +105,11 @@ const LandingPage = () => {
           );
         })
         .catch((error) => {
+          alert("ERROR: 404 TROLOLOL");
           console.error(error); // Handle any errors
         });
     } catch (error) {
+      alert("ERROR: 404 TROLOLOL");
       console.error(
         "There has been a problem with your fetch operation:",
         error
@@ -122,7 +124,7 @@ const LandingPage = () => {
   return (
     <div className={classes.outer_div}>
       <div className={classes.info_header}>
-        This is a surf clip enhancer that uses Lucas-Kanade optical flow in
+        Surfen is a surf clip enhancer that uses Lucas-Kanade optical flow in
         order to detect and follow surfers in a surfline replay.
         <br />
         <b>

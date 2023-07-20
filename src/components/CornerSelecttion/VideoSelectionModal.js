@@ -17,9 +17,6 @@ const VideoSelectionModal = ({
   };
 
   const handleMouseUp = (event) => {
-    const { offsetX, offsetY } = event.nativeEvent;
-    const width = offsetX - startPoint.x;
-    const height = offsetY - startPoint.y;
     const rectangleCoordinates = {
       x:
         Math.round(
@@ -29,15 +26,42 @@ const VideoSelectionModal = ({
         Math.round(
           (startPoint.y / videoRef.current.offsetHeight + Number.EPSILON) * 100
         ) / 100,
-      width: Math.abs(width) / videoRef.current.offsetWidth,
-      height: Math.abs(height) / videoRef.current.offsetHeight,
     };
-    console.log(rectangleCoordinates);
     onRectangleSelection(rectangleCoordinates);
     onClose();
   };
 
   const handleMouseMove = (event) => {
+    if (isHovering) {
+      const { offsetX, offsetY } = event.nativeEvent;
+      setStartPoint({ x: offsetX, y: offsetY });
+    }
+  };
+
+  const handleTouchStart = (event) => {
+    const { touches } = event.nativeEvent;
+    const touch = touches[0];
+    const { clientX, clientY } = touch;
+    const { left, top } = videoRef.current.getBoundingClientRect();
+    setStartPoint({ x: clientX - left, y: clientY - top });
+  };
+
+  const handleTouchEnd = (event) => {
+    const rectangleCoordinates = {
+      x:
+        Math.round(
+          (startPoint.x / videoRef.current.offsetWidth + Number.EPSILON) * 100
+        ) / 100,
+      y:
+        Math.round(
+          (startPoint.y / videoRef.current.offsetHeight + Number.EPSILON) * 100
+        ) / 100,
+    };
+    onRectangleSelection(rectangleCoordinates);
+    onClose();
+  };
+
+  const handleTouchMove = (event) => {
     if (isHovering) {
       const { offsetX, offsetY } = event.nativeEvent;
       setStartPoint({ x: offsetX, y: offsetY });
@@ -55,6 +79,9 @@ const VideoSelectionModal = ({
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
+          onTouchMove={handleTouchMove}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           <video
             ref={videoRef}
@@ -78,7 +105,14 @@ const VideoSelectionModal = ({
             />
           )}
         </div>
-        <h2>Select the general area of the surfer you want to capture.</h2>
+        <h2 className={classes.modal_tip}>
+          Select the general area of the surfer you want to capture.
+          <br />
+          <p style={{ fontSize: "13px", color: "grey" }}>
+            If the resultant video isn't following the surfer correctly,
+            <br /> try moving the bounding box around.
+          </p>
+        </h2>
       </div>
     </div>
   );

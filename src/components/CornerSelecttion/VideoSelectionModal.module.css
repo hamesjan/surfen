@@ -16,7 +16,7 @@
     transform: translate(-50%, -50%);
     width: 500px; /* Adjust the width of the rectangle as needed */
     height: 500px; /* Adjust the height of the rectangle as needed */
-    border: 2px solid red;
+    border: 2px solid blue;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -39,8 +39,11 @@
 
   @media (max-width: 600px) {
     .modal_content{
-        width: 300px;
-        height: 300px;
+        width: 350px;
+        height: 350px;
     }
-    
+    .modal_tip{
+        font-size: 20px;
+    }
+
   }

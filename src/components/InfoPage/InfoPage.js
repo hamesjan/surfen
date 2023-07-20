@@ -27,7 +27,7 @@ const InfoPage = () => {
       awesome.
       <br />
       <br />
-      <b>
+      <b style={{ color: "red" }}>
         PRO TIP: if the optical flow isn't working correctlty, try setting the
         starting box a little down the line from where the you takes off.
       </b>
