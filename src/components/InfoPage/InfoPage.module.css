@@ -3,3 +3,17 @@
     display: block;
     font-size: 15px;
 }
+
+.vid_demo{
+    display: flex;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+    padding: 10px;
+}
+
+@media (max-width: 600px) {
+    .vid_demo{
+        flex-direction: column;
+    }
+  }

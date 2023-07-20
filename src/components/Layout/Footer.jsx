@@ -8,8 +8,7 @@ const Footer = () => {
                 
                 <hr className={classes.topLine}/>
                 
-                <h2>Surf Enhancer</h2> 
-
+                <h2>Surf Enhancer v1.0</h2> 
                 <div className={classes.row}>
                     <a href="/">Home</a>
                     {/* <a href="/">About</a>
@@ -17,6 +16,7 @@ const Footer = () => {
                     <a href="/">Get in touch</a>
                     <a href="/">FAQs</a> */}
                 </div>
+                
 
                 <div className={classes.iconRow}>
                     <a href="https://www.instagram.com/hamesjan/" target="_blank" rel="noreferrer">

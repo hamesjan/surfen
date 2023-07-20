@@ -3,6 +3,7 @@ import classes from "./LandingPage.module.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import fireStorage from "../../firebaseConfig";
 import axios from "axios";
+import VideoSelectionModal from "../CornerSelecttion/VideoSelectionModal";
 
 function generateRandomString(length) {
   const characters =
@@ -22,7 +23,17 @@ const LandingPage = () => {
   const [percent, setPercent] = useState(0);
   const [file, setFile] = useState(null);
   const [outVidLink, setOutVidLink] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   let fileInputRef = useRef(null);
+
+  const [rectangleCoordinates, setRectangleCoordinates] = useState(null);
+
+  const handleStartRectangleSelection = () => {};
+
+  const handleRectangleSelection = (coordinates) => {
+    setRectangleCoordinates(coordinates);
+  };
 
   const handleUpload = (event) => {
     const tempFile = event.target.files[0];
@@ -30,6 +41,7 @@ const LandingPage = () => {
     const videoUrl = URL.createObjectURL(tempFile);
     setVideoUrl(videoUrl);
     fileInputRef = videoUrl;
+    setIsModalOpen(true);
   };
 
   const handleClear = () => {
@@ -41,8 +53,12 @@ const LandingPage = () => {
     }
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const handleUploadAndConvert = async () => {
-    if (!file) {
+    if (!file || !rectangleCoordinates) {
       alert("Please choose a file first!");
     }
     const vidId = generateRandomString(8);
@@ -63,22 +79,30 @@ const LandingPage = () => {
       () => {
         // download url
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log(url);
-          handleBackendCall(url, vidId);
+          handleBackendCall(
+            url,
+            vidId,
+            rectangleCoordinates["x"],
+            rectangleCoordinates["y"]
+          );
         });
       }
     );
   };
 
-  const handleBackendCall = async (vidUrl, vidId) => {
+  const handleBackendCall = async (vidUrl, vidId, x, y) => {
     try {
       axios
         .post(
-          `https://hamesjan.pythonanywhere.com/api/process-video?video_url=${vidUrl}&video_name=${vidId}`
+          `https://hamesjan.pythonanywhere.com/api/process-video?video_url=${vidUrl}&video_name=${vidId}&x=${x}&y=${y}`
         )
         .then((response) => {
           console.log(response.data); // Handle the response data
           setOutVidLink(response.data.processed_video_url);
+          const newTab = window.open(
+            response.data.processed_video_url,
+            "_blank"
+          );
         })
         .catch((error) => {
           console.error(error); // Handle any errors
@@ -92,7 +116,6 @@ const LandingPage = () => {
   };
 
   const downloadVidLink = () => {
-    console.log(outVidLink);
     window.open(outVidLink, "_blank"); // Opens the link in a new tab
   };
 
@@ -111,7 +134,10 @@ const LandingPage = () => {
         <div className={classes.video_box}>
           {videoUrl ? (
             <div>
-              <video controls className={classes.video_holder}>
+              <video
+                className={classes.video_holder}
+                onMouseDown={handleStartRectangleSelection}
+              >
                 <source src={videoUrl} ref={fileInputRef} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
@@ -135,20 +161,30 @@ const LandingPage = () => {
               className={classes.input_file}
             />
           ) : null}
-          <button
-            className={classes.convert_button}
-            onClick={handleUploadAndConvert}
-          >
-            Upload
-          </button>
+          {videoUrl ? (
+            <button
+              className={classes.convert_button}
+              onClick={handleUploadAndConvert}
+            >
+              Convert
+            </button>
+          ) : null}
           {videoUrl ? <p>{percent}%</p> : null}
           {outVidLink !== "" && percent === 100 ? (
             <button onClick={downloadVidLink}> Download</button>
           ) : percent === 100 ? (
-            "Grabbing download link... one second..."
+            "Surfening... one second..."
           ) : null}
         </div>
       </div>
+      {isModalOpen && (
+        <VideoSelectionModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          videoURL={videoUrl}
+          onRectangleSelection={handleRectangleSelection}
+        />
+      )}
     </div>
   );
 };

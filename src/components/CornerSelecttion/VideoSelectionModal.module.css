@@ -1,0 +1,46 @@
+.modal_video_holder{
+    height: auto;
+    width: 100%;
+    position: inherit;
+}
+
+.modal_content{
+    padding: 0px;
+    margin-top: 0px;
+    background-color: white;
+    border: 1px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    width: 500px; /* Adjust the width of the rectangle as needed */
+    height: 500px; /* Adjust the height of the rectangle as needed */
+    border: 2px solid red;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.red_box {
+    position: absolute;
+    z-index: 3;
+    border: 2px dotted red;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+  }
+
+  .thumbnail_container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+
+
+  @media (max-width: 600px) {
+    .modal_content{
+        width: 300px;
+        height: 300px;
+    }
+    
+  }
