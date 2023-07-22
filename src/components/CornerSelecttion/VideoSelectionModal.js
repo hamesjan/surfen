@@ -96,11 +96,11 @@ const VideoSelectionModal = ({
             <div
               className={classes.red_box}
               style={{
-                top: startPoint.y - 20,
-                left: startPoint.x - 20,
+                top: startPoint.y,
+                left: startPoint.x,
                 position: "absolute",
-                width: 50,
-                height: 50,
+                width: 25,
+                height: 25,
               }}
             />
           )}

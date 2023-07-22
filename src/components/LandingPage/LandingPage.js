@@ -130,6 +130,8 @@ const LandingPage = () => {
         <b>
           Be sure to crop the clip's length so that video uploading doesn't take
           too long.
+          <br />
+          This tool works best on laptops and desktops.
         </b>
       </div>
       <div className={classes.container}>
@@ -159,6 +161,7 @@ const LandingPage = () => {
               type="file"
               onChange={handleUpload}
               accept="video/*"
+              capture="environment"
               ref={fileInputRef}
               className={classes.input_file}
             />
