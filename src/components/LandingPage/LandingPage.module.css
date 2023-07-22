@@ -33,19 +33,15 @@
   border: 1px solid black;
 }
 
-.video_holder{
-  width: 320px;
-  height: 240px;
-  object-fit: contain;
-}
-
 .input_file{
   margin-bottom: 30px;
 }
 
 .clear_button{
   position: absolute;
-  left: 0px;
+  left: 50px;
+  width: 50px;
+  top: 0px;
 }
 
 
@@ -62,11 +58,6 @@
   .no_video_box{
     position: inherit;
     margin-left: 50px;
-  }
-
-  .clear_button{
-    position: absolute;
-    left: 50px;
   }
 
   .info_header{

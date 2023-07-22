@@ -4,6 +4,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import fireStorage from "../../firebaseConfig";
 import axios from "axios";
 import VideoSelectionModal from "../CornerSelecttion/VideoSelectionModal";
+import ReactPlayer from "react-player";
 
 function generateRandomString(length) {
   const characters =
@@ -28,8 +29,6 @@ const LandingPage = () => {
   let fileInputRef = useRef(null);
 
   const [rectangleCoordinates, setRectangleCoordinates] = useState(null);
-
-  const handleStartRectangleSelection = () => {};
 
   const handleRectangleSelection = (coordinates) => {
     setRectangleCoordinates(coordinates);
@@ -130,21 +129,28 @@ const LandingPage = () => {
         <b>
           Be sure to crop the clip's length so that video uploading doesn't take
           too long.
-          <br />
-          This tool works best on laptops and desktops.
         </b>
       </div>
       <div className={classes.container}>
         <div className={classes.video_box}>
           {videoUrl ? (
-            <div>
-              <video
-                className={classes.video_holder}
-                onMouseDown={handleStartRectangleSelection}
-              >
-                <source src={videoUrl} ref={fileInputRef} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+            <div style={{ position: "absolute", top: "0px", left: "0px" }}>
+              <ReactPlayer
+                ref={fileInputRef}
+                controls={false}
+                playing={false}
+                muted={true}
+                className="video"
+                width="320px"
+                height="240px"
+                url={videoUrl}
+                type="video/mp4"
+                style={{
+                  marginTop: "0px",
+                  marginLeft: "15%",
+                  marginBottom: "0px",
+                }}
+              />
               <button onClick={handleClear} className={classes.clear_button}>
                 Clear
               </button>
@@ -161,7 +167,6 @@ const LandingPage = () => {
               type="file"
               onChange={handleUpload}
               accept="video/*"
-              capture="environment"
               ref={fileInputRef}
               className={classes.input_file}
             />

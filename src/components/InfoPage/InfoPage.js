@@ -8,6 +8,8 @@ const InfoPage = () => {
     <div className={classes.outer_div}>
       This tool was made for fun. Have fun with it. No seriously. I'm being dead
       serious. <br />
+      It is not very responsive to mobile devices so try on a desktop or laptop
+      if it's buggy.
       <br />
       <b> This is what it does.</b>
       <div className={classes.vid_demo}>

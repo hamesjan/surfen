@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import classes from "./VideoSelectionModal.module.css";
+import ReactPlayer from "react-player";
 
 const VideoSelectionModal = ({
   isOpen,
@@ -28,6 +29,7 @@ const VideoSelectionModal = ({
         ) / 100,
     };
     onRectangleSelection(rectangleCoordinates);
+    console.log(rectangleCoordinates);
     onClose();
   };
 
@@ -58,6 +60,8 @@ const VideoSelectionModal = ({
         ) / 100,
     };
     onRectangleSelection(rectangleCoordinates);
+    console.log(rectangleCoordinates);
+
     onClose();
   };
 
@@ -79,15 +83,37 @@ const VideoSelectionModal = ({
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
+          onMouseUp={handleMouseUp}
+          onMouseDown={handleMouseDown}
           onTouchMove={handleTouchMove}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
+          <ReactPlayer
+            controls={false}
+            playing={false}
+            muted={true}
+            loop={true}
+            className="video"
+            width="100%"
+            height="200px"
+            url={videoURL}
+            type="video/mp4"
+            style={{
+              marginTop: "0px",
+              marginBottom: "0px",
+              marginLeft: "0px",
+              marginRight: "0px",
+              padding: "0px",
+              position: "relative",
+              top: "0px",
+              left: "0px",
+              zIndex: 4,
+            }}
+          />
           <video
             ref={videoRef}
             src={videoURL}
-            onMouseUp={handleMouseUp}
-            onMouseDown={handleMouseDown}
             className={classes.modal_video_holder}
           >
             Your browser does not support the video tag.
@@ -105,14 +131,18 @@ const VideoSelectionModal = ({
             />
           )}
         </div>
-        <h2 className={classes.modal_tip}>
-          Select the general area of the surfer you want to capture.
-          <br />
-          <p style={{ fontSize: "13px", color: "grey" }}>
-            If the resultant video isn't following the surfer correctly,
-            <br /> try moving the bounding box around.
-          </p>
-        </h2>
+        <div className={classes.modal_tip}>
+          <h2>
+            Select the general area of the surfer
+            <br />
+            you want to capture.
+            <br />
+            <p style={{ fontSize: "13px", color: "grey" }}>
+              If the resultant video isn't following the surfer correctly,
+              <br /> try moving the bounding box around.
+            </p>
+          </h2>
+        </div>
       </div>
     </div>
   );
