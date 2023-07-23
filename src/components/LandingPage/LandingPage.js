@@ -98,10 +98,7 @@ const LandingPage = () => {
         .then((response) => {
           console.log(response.data); // Handle the response data
           setOutVidLink(response.data.processed_video_url);
-          const newTab = window.open(
-            response.data.processed_video_url,
-            "_blank"
-          );
+          window.open(response.data.processed_video_url, "_blank");
         })
         .catch((error) => {
           alert("ERROR: 404 TROLOLOL");
