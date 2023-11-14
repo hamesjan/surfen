@@ -42,6 +42,7 @@ const LandingPage = () => {
     fileInputRef = videoUrl;
     setIsModalOpen(true);
     console.log("debug");
+    console.log("hello");
   };
 
   const handleClear = () => {
